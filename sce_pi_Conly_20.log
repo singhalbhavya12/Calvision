@@ -1,0 +1,17 @@
+Info in <TGeoManager::TGeoManager>: Geometry default, Detector Geometry created
+Info in <TGeoNavigator::BuildCache>: --- Maximum geometry depth set to 100
+PersistencyIO    INFO  +++ Set Streamer to dd4hep::OpaqueDataBlock
+Info in <TGeoManager::SetTopVolume>: Top volume is world_volume. Master volume is world_volume
+Creating DRCrys 
+ det_id is 5
+ det_name is .. DRCrystal
+ z offset is 50
+honeycomb thickness is 0.000999
+DRCrys layer 0
+
+**************************************************** 
+*  A runtime error has occured :                     
+*    Handle_t::child: Element [layer] has no child of type 'dimensions'
+*  the program will have to be terminated - sorry.   
+**************************************************** 
+

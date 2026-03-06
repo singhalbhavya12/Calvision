@@ -1,0 +1,46 @@
+h1->SetLineColor(kBlack);
+h1->SetLineStyle(2);
+h1->SetLineWidth(2);
+h2->SetLineColor(kBlack);
+h2->SetLineStyle(1);
+h2->SetLineWidth(2);
+
+
+
+
+void plotOverlay()
+{
+gStyle->SetOptStat(0);
+TFile *f1 =TFile::Open("EPbWO4_2000/histoPbWO4/histo.root");
+TFile *f2 =TFile::Open("BGlass_2000/histo.root");
+TH1F *h1 = (TH1F*)f1->Get("phcEcalNsNc");
+TH1F *h2 = (TH1F*)f2->Get("phcEcalNsNc");
+h1->Scale(1.0 / h1->Integral());
+h2->Scale(1.0 / h2->Integral());
+
+h1->SetLineColor(kBlue);
+h1->SetMarkerColor(kBlue);
+h1->SetMarkerStyle(24);
+h1->SetMarkerSize(0.5);
+
+h2->SetLineColor(kRed);
+h2->SetMarkerColor(kRed);
+h2->SetMarkerStyle(25);
+h2->SetMarkerSize(0.5);
+
+h1->GetXaxis()->SetRangeUser(0, 1.45);
+h1->GetYaxis()->SetRangeUser(0, 1.45);
+h1->GetYaxis()->SetTitle("Cherenkov Signal");
+h1->GetXaxis()->SetTitle("Scintillation Signal");
+
+TLegend *leg = new TLegend(0.65, 0.75, 0.88, 0.88);
+leg->AddEntry(h2, "Glass_ABS", "p");
+leg->AddEntry(h1, "PbWO4", "p");
+TCanvas *c1 = new TCanvas("c1", "Cherenkov vs Scintillation Signal for Calorimeter", 800, 600);
+c1->SetMargin(0.13, 0.05, 0.13, 0.05);
+h1->Draw("P");
+h2->Draw("P SAME");
+leg->Draw();
+
+c1->SaveAs("phcEcalNsNc(ABS_vs_PbWO4).png");
+}
